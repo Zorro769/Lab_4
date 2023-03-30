@@ -8,19 +8,29 @@ public class Main {
         Duck duck_2 = new Duck("eagle");
         Duck duck_3 = new Duck("worm",10.5);
         System.out.println("Check for equality: ");
-        System.out.println(duck_1 == duck_2);
+        System.out.println(duck_2 == duck_1);
+        System.out.println(eagle_1.Eat());
+        eagle_1.ChangeEat("fish");
         System.out.println(eagle_1.Eat());
         System.out.println(eagle_1.Move());
+        System.out.println("---------------------------------------------------------");
+        System.out.println(duck_1.Eat());
+        duck_1.ChangeEat("worm");
         System.out.println(duck_1.Eat());
         System.out.println(duck_1.Move());
+        System.out.println("---------------------------------------------------------");
         System.out.println(eagle_2.Eat());
         System.out.println(eagle_2.Move());
+        System.out.println("---------------------------------------------------------");
         System.out.println(duck_2.Eat());
         System.out.println(duck_2.Move());
+        System.out.println("---------------------------------------------------------");
         System.out.println(eagle_3.Move());
         System.out.println(eagle_3.Eat());
+        System.out.println("---------------------------------------------------------");
         System.out.println(duck_3.Move());
         System.out.println(duck_3.Eat());
+        System.out.println("---------------------------------------------------------");
         Eagle.PrintCalr();
     }
 }
@@ -28,6 +38,7 @@ abstract class Bird {
     protected String eat;
     abstract String Eat();
     abstract String Move();
+    abstract void ChangeEat(String newFood);
 }
 
 class Eagle extends Bird{
@@ -45,7 +56,7 @@ class Eagle extends Bird{
 
     public Eagle() {
         eat = "chickens";
-        flySpeed = 5;
+        setFlySpeed(5);
         Calories += 20;
     }
     public Eagle(String food,Double... speed)
@@ -57,11 +68,11 @@ class Eagle extends Bird{
             this.flySpeed = 10;
         Calories += 30;
     }
-    double getFlySpeed()
+    public double getFlySpeed()
     {
         return flySpeed;
     }
-    void setFlySpeed(double value)
+    public void setFlySpeed(double value)
     {
         flySpeed = value;
     }
@@ -78,12 +89,19 @@ class Eagle extends Bird{
     String Move() {
         return ("Eagle is moving with the speed: " + flySpeed);
     }
+
+    @Override
+    void ChangeEat(String newFood) {
+        this.eat = newFood;
+        System.out.println("The eat has been changed ");
+    }
+
 }
 class Duck extends Bird{
     private double footSpeed;
     Duck(){
         eat = "Wheat";
-        footSpeed = 5;
+        setFootSpeed(5);
     }
     Duck(String food,Double... speed)
     {
@@ -112,6 +130,12 @@ class Duck extends Bird{
     @Override
     String Move() {
         return ("Duck is moving with the speed " + footSpeed);
+    }
+
+    @Override
+    void ChangeEat(String newFood) {
+        this.eat = newFood;
+        System.out.println("The eat has been changed ");
     }
 
     @Override
